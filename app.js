@@ -1657,6 +1657,12 @@ function calculateQuotationData() {
   const totalServiceListPrice = singleServiceListPrice * state.serviceQty;
   const combinedListPrice = propertyListPrice + totalServiceListPrice;
 
+  // Condición Promoción 3x2 (Únicamente 3 Servicios Individuales Universal Pro o Premier Pro con 33.33% de descuento)
+  const isEligibleCategoryFor3x2 =
+    state.serviceQty === 3 &&
+    (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
+  const isPromo3x2 = !hasProperty && isEligibleCategoryFor3x2;
+
   // Determinar porcentaje de Descuento de Oferta Comercial
   let commercialDiscountRate = 0;
   let commercialDiscountLabel = 'Sin Descuento Comercial (0%)';
@@ -1674,7 +1680,11 @@ function calculateQuotationData() {
     commercialDiscountRate = tableForServ[state.serviceQty] || 0;
     const pctStr =
       commercialDiscountRate === 0.3333 ? '33.33%' : `${(commercialDiscountRate * 100).toFixed(0)}%`;
-    commercialDiscountLabel = `Servicios Individuales (${state.serviceQty} SF ${state.serviceCategoryId}): -${pctStr}`;
+    if (isPromo3x2) {
+      commercialDiscountLabel = `Promoción 3x2 (3 SF ${state.serviceCategoryId}): -${pctStr} (Compra 2 y lleva 3)`;
+    } else {
+      commercialDiscountLabel = `Servicios Individuales (${state.serviceQty} SF ${state.serviceCategoryId}): -${pctStr}`;
+    }
   } else if (hasProperty && !hasService) {
     commercialDiscountRate = 0;
     commercialDiscountLabel = 'Solo Propiedad (0% Descuento Integral)';
@@ -1729,15 +1739,22 @@ function calculateQuotationData() {
     combinedListPrice,
     commercialDiscountRate,
     commercialDiscountLabel,
+    isPromo3x2,
+    isEligibleCategoryFor3x2,
     paymentBreakdowns
   };
 }
 
 function renderAll() {
   // Actualizar estado visual de botones de cantidad de servicios
+  const isCat3x2 =
+    state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER';
   document.querySelectorAll('.qty-btn').forEach((btn) => {
     const qty = parseInt(btn.dataset.qty, 10);
     btn.classList.toggle('active', qty === state.serviceQty);
+    if (qty === 3) {
+      btn.textContent = isCat3x2 && state.locationId === 'NONE' ? '3 SF (3x2)' : '3 SF';
+    }
   });
 
   const serviceCategorySelect = document.getElementById('serviceCategorySelect');
@@ -1780,6 +1797,42 @@ function renderAll() {
   // Calcular datos de la cotización
   const data = calculateQuotationData();
 
+  // Mostrar aviso contextual de Promoción 3x2 en el Paso 2 del configurador
+  const promoNoticeEl = document.getElementById('promo3x2Notice');
+  if (promoNoticeEl) {
+    if (data.isPromo3x2 && data.serviceCategory) {
+      promoNoticeEl.style.display = 'block';
+      promoNoticeEl.innerHTML = `
+        <strong>✓ Promoción 3x2 Aplicada (-33.33%):</strong> En la cotización el cliente verá que adquiere <strong>2 ${data.serviceCategory.pluralTitle}</strong> y recibe <strong>1 servicio más sin costo</strong> (3 servicios en total).
+      `;
+    } else if (data.isEligibleCategoryFor3x2 && data.hasProperty && data.serviceCategory) {
+      promoNoticeEl.style.display = 'block';
+      promoNoticeEl.innerHTML = `
+        <strong>💡 Promoción 3x2 (-33.33%):</strong> Aplica en Servicios Individuales (sin propiedad).
+        <div style="margin-top: 0.4rem;">
+          <button type="button" id="switchTo3x2OnlyBtn" style="background: #1C5560; color: #ffffff; border: none; border-radius: 0.35rem; padding: 0.35rem 0.65rem; font-size: 0.74rem; font-weight: 600; cursor: pointer;">
+            Cambiar a Solo 3 Servicios (Activar 3x2)
+          </button>
+        </div>
+      `;
+      const switchBtn = document.getElementById('switchTo3x2OnlyBtn');
+      if (switchBtn) {
+        switchBtn.addEventListener('click', () => {
+          state.locationId = 'NONE';
+          state.propertyTypeFilter = 'ALL';
+          const locationSelect = document.getElementById('locationSelect');
+          if (locationSelect) locationSelect.value = 'NONE';
+          populatePropertyTypes();
+          populatePropertiesList(true);
+          renderAll();
+        });
+      }
+    } else {
+      promoNoticeEl.style.display = 'none';
+      promoNoticeEl.innerHTML = '';
+    }
+  }
+
   // Actualizar barra de resumen para el asesor
   document.getElementById('summaryPropPrice').textContent = `$${formatMoney(data.propertyListPrice)}`;
   document.getElementById('summaryServPrice').textContent = `$${formatMoney(data.totalServiceListPrice)}`;
@@ -1803,6 +1856,8 @@ function renderAll() {
     subtitleEl.textContent = 'Plan Integral de Previsión';
   } else if (data.hasProperty) {
     subtitleEl.textContent = 'Propiedad de Descanso Final';
+  } else if (data.isPromo3x2) {
+    subtitleEl.textContent = 'Plan de Previsión Funeraria · Promoción 3x2';
   } else {
     subtitleEl.textContent = 'Plan de Previsión Funeraria';
   }
@@ -1819,7 +1874,9 @@ function renderAll() {
     const propFeaturesHtml = data.property.features.map((f) => `<li>${f}</li>`).join('');
     detailsHtml += `
       <div class="detail-card">
-        <h3 class="detail-card-category">Propiedad</h3>
+        <div class="detail-card-top-row">
+          <h3 class="detail-card-category">Propiedad</h3>
+        </div>
         <p class="detail-card-name">${data.property.displayName}</p>
         <p class="detail-card-location">${data.location.name} (${data.location.code})</p>
         <ul class="detail-features-list">
@@ -1830,23 +1887,47 @@ function renderAll() {
   }
 
   if (data.hasService && data.serviceCategory && data.agency) {
-    const serviceTitle =
-      state.serviceQty === 1
-        ? data.serviceCategory.singularTitle
-        : `${state.serviceQty} ${data.serviceCategory.pluralTitle}`;
     const serviceFeatures = data.serviceCategory.getFeatures(data.agency.tier);
     const servFeaturesHtml = serviceFeatures.map((f) => `<li>${f}</li>`).join('');
 
-    detailsHtml += `
-      <div class="detail-card">
-        <h3 class="detail-card-category">Servicios Funerarios</h3>
-        <p class="detail-card-name">${serviceTitle}</p>
-        <p class="detail-card-location">${data.agency.name} (${data.agency.code})</p>
-        <ul class="detail-features-list two-cols">
-          ${servFeaturesHtml}
-        </ul>
-      </div>
-    `;
+    if (data.isPromo3x2) {
+      detailsHtml += `
+        <div class="detail-card promo-3x2-card">
+          <div class="detail-card-top-row">
+            <h3 class="detail-card-category">Servicios Funerarios</h3>
+            <span class="detail-promo-3x2-badge">Promoción 3x2 · Paga 2 y Lleva 3</span>
+          </div>
+          <p class="detail-card-name">
+            2 ${data.serviceCategory.pluralTitle} + <span class="detail-card-name-highlight">1 Servicio Adicional Sin Costo</span>
+          </p>
+          <p class="detail-card-location">${data.agency.name} (${data.agency.code})</p>
+          <div class="promo-3x2-banner">
+            <strong>Beneficio 3x2 Aplicado:</strong> Por la compra de <strong>2 ${data.serviceCategory.pluralTitle}</strong>, te llevas <strong>1 Servicio adicional sin costo</strong> (Total: <strong>3 ${data.serviceCategory.pluralTitle}</strong> incluidos).
+          </div>
+          <ul class="detail-features-list two-cols">
+            ${servFeaturesHtml}
+          </ul>
+        </div>
+      `;
+    } else {
+      const serviceTitle =
+        state.serviceQty === 1
+          ? data.serviceCategory.singularTitle
+          : `${state.serviceQty} ${data.serviceCategory.pluralTitle}`;
+
+      detailsHtml += `
+        <div class="detail-card">
+          <div class="detail-card-top-row">
+            <h3 class="detail-card-category">Servicios Funerarios</h3>
+          </div>
+          <p class="detail-card-name">${serviceTitle}</p>
+          <p class="detail-card-location">${data.agency.name} (${data.agency.code})</p>
+          <ul class="detail-features-list two-cols">
+            ${servFeaturesHtml}
+          </ul>
+        </div>
+      `;
+    }
   }
 
   detailsGrid.innerHTML = detailsHtml;
