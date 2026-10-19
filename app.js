@@ -110,7 +110,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Gabriel Nivel Superior',
     integralType: 'Nicho',
     price: 33035,
-    features: ['Capacidad: 4 Urnas', 'Mausoleo Gabriel · Nivel Superior']
+    features: ['Capacidad: 2 Urnas', 'Mausoleo Gabriel · Nivel Superior']
   },
   {
     id: 'MA01-827434',
@@ -120,7 +120,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Miguel Nivel Superior',
     integralType: 'Nicho',
     price: 33035,
-    features: ['Capacidad: 4 Urnas', 'Mausoleo Miguel · Nivel Superior']
+    features: ['Capacidad: 2 Urnas', 'Mausoleo Miguel · Nivel Superior']
   },
   {
     id: 'MA01-827416',
@@ -130,7 +130,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Gabriel Nivel Inferior',
     integralType: 'Nicho',
     price: 38850,
-    features: ['Capacidad: 4 Urnas', 'Mausoleo Gabriel · Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', 'Mausoleo Gabriel · Nivel Inferior']
   },
   {
     id: 'MA01-827437',
@@ -140,7 +140,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Miguel Nivel Inferior',
     integralType: 'Nicho',
     price: 38850,
-    features: ['Capacidad: 4 Urnas', 'Mausoleo Miguel · Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', 'Mausoleo Miguel · Nivel Inferior']
   },
   {
     id: 'MA01-827415',
@@ -150,7 +150,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Gabriel Nivel Medio',
     integralType: 'Nicho',
     price: 44580,
-    features: ['Capacidad: 4 Urnas', 'Mausoleo Gabriel · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Mausoleo Gabriel · Nivel Medio']
   },
   {
     id: 'MA01-827435',
@@ -160,7 +160,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Miguel Nivel Medio',
     integralType: 'Nicho',
     price: 44580,
-    features: ['Capacidad: 4 Urnas', 'Mausoleo Miguel · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Mausoleo Miguel · Nivel Medio']
   },
   {
     id: 'MA01-827417',
@@ -493,7 +493,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Superior',
     integralType: 'Nicho',
     price: 53725,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Superior']
   },
   {
     id: 'CP20-826921',
@@ -503,7 +503,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Inferior',
     integralType: 'Nicho',
     price: 66125,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Inferior']
   },
   {
     id: 'CP20-826920',
@@ -513,7 +513,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Medio',
     integralType: 'Nicho',
     price: 78525,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Medio']
   },
   {
     id: 'CP20-826922',
@@ -645,7 +645,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Cementerio Nivel Superior',
     integralType: 'Nicho',
     price: 52415,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Superior']
   },
   {
     id: 'CC21-826253',
@@ -655,7 +655,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Cementerio Nivel Inferior',
     integralType: 'Nicho',
     price: 62900,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Inferior']
   },
   {
     id: 'CC21-826252',
@@ -665,7 +665,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Cementerio Nivel Medio',
     integralType: 'Nicho',
     price: 75130,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Medio']
   },
   {
     id: 'CC21-826705',
@@ -707,7 +707,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Premier Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 59495,
-    features: ['Capacidad: 4 Urnas', 'Zona Premier · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', 'Zona Premier · Nivel Sup/Inf']
   },
   {
     id: 'MFC1-822364',
@@ -717,7 +717,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 84995,
-    features: ['Capacidad: 4 Urnas', 'Zona Capilla · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Sup/Inf']
   },
   {
     id: 'MFC1-822368',
@@ -727,7 +727,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Medio',
     integralType: 'Nicho',
     price: 114750,
-    features: ['Capacidad: 4 Urnas', 'Zona Capilla · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Medio']
   },
   {
     id: 'MFC1-825739',
@@ -769,7 +769,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona JPII Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 120185,
-    features: ['Capacidad: 4 Urnas', 'Zona Juan Pablo II · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', 'Zona Juan Pablo II · Nivel Sup/Inf']
   },
   {
     id: 'MLM1-827239',
@@ -779,7 +779,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona JPII Nivel Medio',
     integralType: 'Nicho',
     price: 137915,
-    features: ['Capacidad: 4 Urnas', 'Zona Juan Pablo II · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Zona Juan Pablo II · Nivel Medio']
   },
   {
     id: 'MLM1-827235',
@@ -789,7 +789,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Premier Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 145005,
-    features: ['Capacidad: 4 Urnas', 'Zona Premier · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', 'Zona Premier · Nivel Sup/Inf']
   },
   {
     id: 'MLM1-827236',
@@ -799,7 +799,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Premier Nivel Medio',
     integralType: 'Nicho',
     price: 166275,
-    features: ['Capacidad: 4 Urnas', 'Zona Premier · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Zona Premier · Nivel Medio']
   },
 
   // ===================== MGM2: MAUSOLEO SULLIVAN =====================
@@ -811,7 +811,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Mausoleo Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 25430,
-    features: ['Capacidad: 4 Urnas', 'Zona Mausoleo · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', 'Zona Mausoleo · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-823080',
@@ -821,7 +821,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Mausoleo Nivel Medio',
     integralType: 'Nicho',
     price: 34335,
-    features: ['Capacidad: 4 Urnas', 'Zona Mausoleo · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Zona Mausoleo · Nivel Medio']
   },
   {
     id: 'MGM2-824600',
@@ -881,7 +881,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 101720,
-    features: ['Capacidad: 4 Urnas', 'Zona Capilla · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-824603',
@@ -891,7 +891,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Medio',
     integralType: 'Nicho',
     price: 137320,
-    features: ['Capacidad: 4 Urnas', 'Zona Capilla · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Medio']
   },
 
   // ===================== MSM1: MAUSOLEO SANTA MÓNICA =====================
@@ -903,7 +903,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Superior',
     integralType: 'Nicho',
     price: 42500,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Superior']
   },
   {
     id: 'MSM1-NC-MED',
@@ -913,7 +913,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Medio',
     integralType: 'Nicho',
     price: 57400,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Medio']
   },
   {
     id: 'MSM1-NC-INF',
@@ -923,7 +923,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Inferior',
     integralType: 'Nicho',
     price: 49900,
-    features: ['Capacidad: 4 Urnas', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Inferior']
   },
   {
     id: 'MSM1-NG-SUP',
