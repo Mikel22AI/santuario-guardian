@@ -1,0 +1,1024 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --brand-teal: #1C5560;
+  --brand-teal-hover: #154048;
+  --brand-teal-tint: rgba(28, 85, 96, 0.05);
+  --brand-teal-border-soft: rgba(28, 85, 96, 0.2);
+  --bg-page: #ECECDD;
+  --bg-card: #ffffff;
+  --bg-box: #f9fafb;
+  --text-dark: #1f2937;
+  --text-heading: #374151;
+  --text-muted: #6b7280;
+  --text-light: #9ca3af;
+  --border-light: #e5e7eb;
+  --border-card: #d1d5db;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg-page);
+  color: var(--text-dark);
+  min-height: 100vh;
+}
+
+/* Layout Principal */
+.app-wrapper {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* Barra superior del configurador */
+.configurator-panel {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  margin-bottom: 2rem;
+  overflow: hidden;
+}
+
+.configurator-header {
+  background: var(--brand-teal);
+  color: #ffffff;
+  padding: 0.875rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.configurator-header-title {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.01em;
+}
+
+.configurator-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-header-toggle {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn-header-toggle:hover {
+  background: rgba(255, 255, 255, 0.24);
+}
+
+.configurator-body {
+  padding: 1.5rem;
+}
+
+.configurator-body.collapsed {
+  display: none;
+}
+
+.config-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .config-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.config-card {
+  background: var(--bg-box);
+  border: 1px solid var(--border-light);
+  border-radius: 0.625rem;
+  padding: 1.125rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.875rem;
+}
+
+.config-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 0.5rem;
+}
+
+.config-card-title {
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--brand-teal);
+  margin: 0;
+}
+
+.badge-pill {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+  background: rgba(28, 85, 96, 0.12);
+  color: var(--brand-teal);
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.form-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-select,
+.form-input {
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: var(--text-dark);
+  background-color: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: 0.45rem;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-select:focus,
+.form-input:focus {
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 2px rgba(28, 85, 96, 0.15);
+}
+
+.form-select:disabled,
+.form-input:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Selector de cantidad de servicios */
+.qty-selector {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.35rem;
+}
+
+.qty-btn {
+  padding: 0.5rem 0.25rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: 1px solid var(--border-card);
+  background: #ffffff;
+  color: var(--text-heading);
+  border-radius: 0.4rem;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.qty-btn:hover {
+  border-color: var(--brand-teal);
+}
+
+.qty-btn.active {
+  background: var(--brand-teal);
+  color: #ffffff;
+  border-color: var(--brand-teal);
+}
+
+/* Lista de formas de pago */
+.payment-options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 230px;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+}
+
+.payment-option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  border-radius: 0.45rem;
+  padding: 0.45rem 0.6rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.payment-option-item:hover {
+  border-color: var(--brand-teal);
+}
+
+.payment-option-item.selected {
+  border-color: var(--brand-teal);
+  background: rgba(28, 85, 96, 0.06);
+}
+
+.payment-option-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.payment-option-left input[type="checkbox"] {
+  accent-color: var(--brand-teal);
+  width: 0.95rem;
+  height: 0.95rem;
+  cursor: pointer;
+}
+
+.payment-code-tag {
+  font-weight: 700;
+  color: var(--brand-teal);
+  min-width: 2.6rem;
+  display: inline-block;
+}
+
+.payment-desc-tag {
+  color: var(--text-heading);
+  font-size: 0.76rem;
+}
+
+.payment-discount-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  background: #f3f4f6;
+  padding: 0.1rem 0.4rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+}
+
+/* Control de enganche */
+.downpayment-control-box {
+  background: #ffffff;
+  border: 1px dashed var(--brand-teal);
+  border-radius: 0.5rem;
+  padding: 0.65rem 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.downpayment-slider-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.downpayment-slider-row input[type="range"] {
+  flex: 1;
+  accent-color: var(--brand-teal);
+  cursor: pointer;
+}
+
+.downpayment-number-input {
+  width: 4.2rem;
+  padding: 0.25rem 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  border: 1px solid var(--border-card);
+  border-radius: 0.35rem;
+  color: var(--brand-teal);
+}
+
+/* Barra de resumen matemático para el asesor */
+.advisor-summary-bar {
+  margin-top: 1.15rem;
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.advisor-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.advisor-metric-item strong {
+  color: var(--text-dark);
+}
+
+.advisor-extra-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* ==========================================================================
+   ELEMENTOS EXCLUSIVOS DE CELULAR (Ocultos en versión Computadora)
+   ========================================================================== */
+
+.mobile-stepper,
+.mobile-step-nav,
+.mobile-back-bar,
+.btn-mobile-new-quote-bottom {
+  display: none;
+}
+
+@keyframes mobileStepSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes mobileQuoteFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Cuando se detecta Celular (body.is-mobile) */
+body.is-mobile .app-wrapper {
+  padding: 0.875rem 0.75rem 2.25rem;
+}
+
+body.is-mobile .desktop-only-control {
+  display: none !important;
+}
+
+/* Fase 1 en Celular: Mostrar Configurador paso a paso, Ocultar Cotización */
+body.is-mobile.mobile-phase-1 #configuratorPanel {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+body.is-mobile.mobile-phase-1 #quotationPhaseWrap {
+  display: none !important;
+}
+
+/* Fase 2 en Celular: Ocultar Configurador, Mostrar Cotización */
+body.is-mobile.mobile-phase-2 #configuratorPanel {
+  display: none !important;
+}
+
+body.is-mobile.mobile-phase-2 #quotationPhaseWrap {
+  display: block;
+  animation: mobileQuoteFadeIn 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Stepper superior en Celular */
+body.is-mobile .mobile-stepper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.875rem 1.25rem;
+  background: #f8fafc;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.mobile-step-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-light);
+  transition: color 0.2s ease;
+}
+
+.mobile-step-indicator .step-circle {
+  width: 1.55rem;
+  height: 1.55rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #e5e7eb;
+  color: #6b7280;
+  transition: all 0.2s ease;
+}
+
+.mobile-step-indicator.active {
+  color: var(--brand-teal);
+}
+
+.mobile-step-indicator.active .step-circle {
+  background: var(--brand-teal);
+  color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(28, 85, 96, 0.16);
+}
+
+.mobile-step-indicator.completed {
+  color: var(--brand-teal);
+}
+
+.mobile-step-indicator.completed .step-circle {
+  background: rgba(28, 85, 96, 0.15);
+  color: var(--brand-teal);
+}
+
+.step-connector {
+  flex: 1;
+  height: 2px;
+  background: #e5e7eb;
+  margin: 0 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.step-connector.completed {
+  background: var(--brand-teal);
+}
+
+/* Tarjetas por paso en Celular */
+body.is-mobile .configurator-body {
+  padding: 1rem;
+}
+
+body.is-mobile .config-grid {
+  display: block;
+}
+
+body.is-mobile .config-card {
+  display: none;
+  padding: 1.25rem 1rem;
+}
+
+body.is-mobile .config-card.active-mobile-step {
+  display: flex;
+  animation: mobileStepSlideIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.is-mobile .form-select,
+body.is-mobile .form-input {
+  padding: 0.7rem 0.75rem;
+  font-size: 0.92rem;
+}
+
+body.is-mobile .qty-btn {
+  padding: 0.65rem 0.25rem;
+  font-size: 0.85rem;
+}
+
+/* Botones Siguiente / Anterior / Cotizar en Celular */
+body.is-mobile .mobile-step-nav {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-light);
+}
+
+body.is-mobile .mobile-step-nav.two-buttons {
+  justify-content: space-between;
+}
+
+.btn-mobile-prev {
+  background: #ffffff;
+  color: var(--text-heading);
+  border: 1px solid var(--border-card);
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.btn-mobile-next {
+  background: var(--brand-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.7rem 1.25rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  margin-left: auto;
+  box-shadow: 0 2px 6px rgba(28, 85, 96, 0.25);
+}
+
+.btn-mobile-quote {
+  background: var(--brand-teal);
+  color: #ffffff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(28, 85, 96, 0.3);
+}
+
+/* Resumen del asesor en móvil solo en paso 3 para mantener limpia la vista */
+body.is-mobile .advisor-summary-bar {
+  display: none;
+}
+
+body.is-mobile .advisor-summary-bar.visible-on-step-3 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: #f9fafb;
+  padding: 0.85rem;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border-light);
+  margin-top: 0.85rem;
+}
+
+body.is-mobile .advisor-metrics {
+  gap: 0.5rem;
+  font-size: 0.75rem;
+}
+
+/* Botones para regresar a cotizar algo nuevo en Fase 2 de Celular */
+body.is-mobile .mobile-back-bar {
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.85rem;
+}
+
+.btn-mobile-new-quote {
+  background: #ffffff;
+  color: var(--brand-teal);
+  border: 1px solid var(--brand-teal);
+  border-radius: 0.5rem;
+  padding: 0.55rem 0.95rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  font-family: inherit;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+body.is-mobile .btn-mobile-new-quote-bottom {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: #ffffff;
+  color: var(--text-heading);
+  border: 1px solid var(--border-card);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+  width: 100%;
+}
+
+body.is-mobile .actions-bar .btn-capture,
+body.is-mobile .actions-bar .btn-secondary-action {
+  width: 100%;
+  justify-content: center;
+}
+
+/* ==========================================================================
+   DISEÑO DEFINITIVO DE LA COTIZACIÓN (#quotation-container)
+   ========================================================================== */
+
+.quotation-outer-wrap {
+  width: 100%;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+#quotation-container {
+  background-color: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  #quotation-container {
+    padding: 2.5rem;
+  }
+}
+
+.quote-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  border-bottom: 2px solid var(--brand-teal);
+  padding-bottom: 1rem;
+  margin-bottom: 2rem;
+}
+
+@media (min-width: 768px) {
+  .quote-header {
+    flex-direction: row;
+    align-items: flex-end;
+  }
+}
+
+.quote-main-title {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+}
+
+.quote-subtitle {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.025em;
+  margin: 0;
+}
+
+.quote-code-wrap {
+  margin-top: 1rem;
+  text-align: right;
+}
+
+@media (min-width: 768px) {
+  .quote-code-wrap {
+    margin-top: 0;
+  }
+}
+
+.quote-code-text {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #9ca3af;
+  margin: 0;
+}
+
+.quote-section {
+  margin-bottom: 2.5rem;
+}
+
+.quote-section:last-of-type {
+  margin-bottom: 0;
+}
+
+.quote-section-title {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+  font-weight: 700;
+  color: #374151;
+  margin: 0 0 1rem 0;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+/* Grid Detalle del Plan */
+.plan-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .plan-details-grid.cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .plan-details-grid.cols-1 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.detail-card {
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.detail-card-category {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--brand-teal);
+  margin: 0 0 0.5rem 0;
+}
+
+.detail-card-name {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #1f2937;
+  line-height: 1.25;
+  margin: 0;
+}
+
+.detail-card-location {
+  font-size: 0.875rem;
+  color: #4b5563;
+  margin: 0.25rem 0 1rem 0;
+}
+
+.detail-features-list {
+  list-style-type: disc;
+  list-style-position: inside;
+  font-size: 0.875rem;
+  color: #374151;
+  margin: 0;
+  padding: 1rem 0 0 0;
+  border-top: 1px solid #e5e7eb;
+}
+
+.detail-features-list li + li {
+  margin-top: 0.25rem;
+}
+
+.detail-features-list.two-cols {
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 0.25rem;
+  column-gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .detail-features-list.two-cols {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .detail-features-list.two-cols li + li {
+    margin-top: 0;
+  }
+}
+
+/* Grid Opciones de Pago */
+.payment-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .payment-cards-grid.cols-1 {
+    grid-template-columns: minmax(280px, 420px);
+    justify-content: center;
+  }
+  .payment-cards-grid.cols-2 {
+    grid-template-columns: repeat(2, minmax(260px, 400px));
+    justify-content: center;
+  }
+  .payment-cards-grid.cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.payment-card {
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  background-color: #ffffff;
+}
+
+.payment-card.recommended {
+  border: 2px solid var(--brand-teal);
+  background-color: var(--brand-teal-tint);
+}
+
+.recommended-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: var(--brand-teal);
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 0.25rem 0.75rem;
+  border-bottom-left-radius: 0.5rem;
+  border-top-right-radius: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.payment-card-top {
+  width: 100%;
+  text-align: center;
+}
+
+.payment-card-code {
+  font-weight: 700;
+  color: var(--brand-teal);
+  font-size: 1.125rem;
+  margin: 0 0 0.25rem 0;
+}
+
+.payment-card-subtitle {
+  font-size: 0.875rem;
+  color: #6b7280;
+  margin: 0 0 1rem 0;
+}
+
+.payment-amount-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: #1f2937;
+  margin-bottom: 0.25rem;
+}
+
+.payment-currency-symbol {
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin-top: 0.25rem;
+  margin-right: 0.25rem;
+}
+
+.payment-main-figure {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+.payment-period-label {
+  font-size: 0.75rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.payment-card-bottom {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+
+.payment-card.recommended .payment-card-bottom {
+  border-top-color: var(--brand-teal-border-soft);
+}
+
+.payment-downpayment-line {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0 0 0.25rem 0;
+}
+
+.payment-total-line {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+  margin: 0;
+}
+
+.payment-note-line {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.quote-footer {
+  margin-top: 2.5rem;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.quote-footer-text {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin: 0;
+}
+
+.quote-footer-text .font-medium {
+  font-weight: 500;
+}
+
+/* Acciones inferiores */
+.actions-bar {
+  display: flex;
+  justify-content: center;
+  gap: 0.875rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-capture {
+  background-color: var(--brand-teal);
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.15s ease;
+}
+
+.btn-capture:hover {
+  background-color: var(--brand-teal-hover);
+}
+
+.btn-secondary-action {
+  background-color: #ffffff;
+  color: var(--brand-teal);
+  border: 1px solid var(--brand-teal);
+  padding: 0.75rem 1.25rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.15s ease;
+}
+
+.btn-secondary-action:hover {
+  background-color: rgba(28, 85, 96, 0.06);
+}
+
+@media print {
+  body {
+    background: #ffffff;
+  }
+  .configurator-panel,
+  .actions-bar,
+  .mobile-back-bar {
+    display: none !important;
+  }
+  #quotationPhaseWrap {
+    display: block !important;
+  }
+  #quotation-container {
+    box-shadow: none;
+    border: 1px solid #d1d5db;
+    margin: 0;
+  }
+}
