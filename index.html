@@ -142,31 +142,35 @@
               <div id="paymentCheckboxesContainer" class="payment-options-list"></div>
             </div>
 
-            <!-- Control deslizable de enganche (15% a 70%) -->
+            <!-- Control de enganche por cantidad específica (15% por defecto hasta 70% máx.) -->
             <div id="downpaymentControlBox" class="downpayment-control-box">
-              <label class="form-label" for="downpaymentRange">
-                <span>Ajustar Enganche Flexible (15% - 70%)</span>
-              </label>
-              <div class="downpayment-slider-row">
-                <input
-                  type="range"
-                  id="downpaymentRange"
-                  min="15"
-                  max="70"
-                  step="1"
-                  value="15"
-                />
-                <input
-                  type="number"
-                  id="downpaymentInput"
-                  class="downpayment-number-input"
-                  min="15"
-                  max="70"
-                  step="1"
-                  value="15"
-                  aria-label="Porcentaje de enganche"
-                />
-                <span style="font-size: 0.8rem; font-weight: 700; color: #1C5560;">%</span>
+              <div class="downpayment-header-row">
+                <label class="form-label" for="downpaymentAmountInput">
+                  <span>Enganche Flexible (15% - 70%)</span>
+                </label>
+                <button type="button" id="resetDownpaymentBtn" class="btn-reset-dp" title="Restablecer al 15% por defecto">
+                  Usar 15%
+                </button>
+              </div>
+              <div class="downpayment-amount-row">
+                <div class="downpayment-currency-input-wrap">
+                  <span class="dp-currency-prefix">$</span>
+                  <input
+                    type="number"
+                    id="downpaymentAmountInput"
+                    class="downpayment-amount-input"
+                    step="100"
+                    min="0"
+                    placeholder="0.00"
+                    aria-label="Cantidad específica de enganche"
+                  />
+                </div>
+                <div class="downpayment-pct-badge" id="downpaymentPercentBadge" title="Porcentaje que representa esta cantidad sobre el total del plan">
+                  15%
+                </div>
+              </div>
+              <div class="downpayment-range-hint" id="downpaymentRangeHint">
+                Mín (15%): $0.00 · Máx (70%): $0.00
               </div>
             </div>
 

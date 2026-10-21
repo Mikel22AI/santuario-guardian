@@ -1251,7 +1251,8 @@ const state = {
   agencyId: 'FS05',
   selectedPayments: ['D036', 'D035', 'P001'],
   recommendedPaymentCode: 'P001',
-  downpaymentPercent: 15, // 15% a 70%
+  downpaymentPercent: 15, // Porcentaje equivalente (15% por defecto hasta 70%)
+  customDownpaymentAmount: null, // null = usa automáticamente el 15% por defecto
   extraSecretDiscountPct: 0, // Descuento adicional oculto en cascada (%)
   isMobileMode: false,
   mobileStep: 1, // 1: Propiedad, 2: Servicios, 3: Opciones de Pago
@@ -1428,6 +1429,7 @@ function initControls() {
   locationSelect.addEventListener('change', (e) => {
     state.locationId = e.target.value;
     state.propertyTypeFilter = 'ALL';
+    state.customDownpaymentAmount = null;
     populatePropertyTypes();
     populatePropertiesList(true);
     renderAll();
@@ -1437,6 +1439,7 @@ function initControls() {
   const propertyTypeSelect = document.getElementById('propertyTypeSelect');
   propertyTypeSelect.addEventListener('change', (e) => {
     state.propertyTypeFilter = e.target.value;
+    state.customDownpaymentAmount = null;
     populatePropertiesList(true);
     renderAll();
   });
@@ -1445,6 +1448,7 @@ function initControls() {
   const propertySelect = document.getElementById('propertySelect');
   propertySelect.addEventListener('change', (e) => {
     state.propertyId = e.target.value;
+    state.customDownpaymentAmount = null;
     renderAll();
   });
 
@@ -1461,6 +1465,7 @@ function initControls() {
         populatePropertiesList(true);
       }
       state.serviceQty = qty;
+      state.customDownpaymentAmount = null;
       renderAll();
     });
   });
@@ -1470,6 +1475,7 @@ function initControls() {
   serviceCategorySelect.value = state.serviceCategoryId;
   serviceCategorySelect.addEventListener('change', (e) => {
     state.serviceCategoryId = e.target.value;
+    state.customDownpaymentAmount = null;
     renderAll();
   });
 
@@ -1497,28 +1503,44 @@ function initControls() {
 
   agencySelect.addEventListener('change', (e) => {
     state.agencyId = e.target.value;
+    state.customDownpaymentAmount = null;
     renderAll();
   });
 
-  // 7. Control deslizable e input de Enganche (15% a 70%)
-  const dpRange = document.getElementById('downpaymentRange');
-  const dpInput = document.getElementById('downpaymentInput');
+  // 7. Recuadro de cantidad específica de Enganche (15% por defecto hasta 70% máx.)
+  const dpAmountInput = document.getElementById('downpaymentAmountInput');
+  const resetDpBtn = document.getElementById('resetDownpaymentBtn');
 
-  dpRange.addEventListener('input', (e) => {
-    const val = Math.min(70, Math.max(15, parseInt(e.target.value, 10) || 15));
-    state.downpaymentPercent = val;
-    dpInput.value = val;
-    renderAll();
-  });
+  if (dpAmountInput) {
+    dpAmountInput.addEventListener('input', (e) => {
+      const raw = e.target.value.trim();
+      if (raw === '') {
+        state.customDownpaymentAmount = null;
+        renderAll({ skipDpInputSync: true });
+        return;
+      }
+      const val = parseFloat(raw);
+      if (isNaN(val)) return;
+      state.customDownpaymentAmount = val;
+      renderAll({ skipDpInputSync: true });
+    });
 
-  dpInput.addEventListener('input', (e) => {
-    let val = parseInt(e.target.value, 10);
-    if (isNaN(val)) return;
-    val = Math.min(70, Math.max(15, val));
-    state.downpaymentPercent = val;
-    dpRange.value = val;
-    renderAll();
-  });
+    dpAmountInput.addEventListener('blur', () => {
+      renderAll({ skipDpInputSync: false });
+    });
+
+    dpAmountInput.addEventListener('change', () => {
+      renderAll({ skipDpInputSync: false });
+    });
+  }
+
+  if (resetDpBtn) {
+    resetDpBtn.addEventListener('click', () => {
+      state.customDownpaymentAmount = null;
+      state.downpaymentPercent = 15;
+      renderAll();
+    });
+  }
 
   // 8. Selector de Tarjeta Recomendada
   const recommendedSelect = document.getElementById('recommendedSelect');
@@ -1692,6 +1714,24 @@ function calculateQuotationData() {
 
   const extraSecretRate = (state.extraSecretDiscountPct || 0) / 100;
 
+  // Calcular límites de enganche flexible (15% mínimo por defecto y 70% máximo)
+  // Todos los planes con enganche flexible (D035, D024, D012, DD35, DD24, DD12) tienen 15% de desc. por forma de pago
+  const flexiblePlanTotal = combinedListPrice * (1 - 0.15) * (1 - commercialDiscountRate) * (1 - extraSecretRate);
+  const minDpAmount = flexiblePlanTotal * 0.15;
+  const maxDpAmount = flexiblePlanTotal * 0.70;
+
+  let effectiveFlexibleDpAmount = minDpAmount;
+  let effectiveFlexibleDpPct = 15;
+
+  if (state.customDownpaymentAmount !== null && flexiblePlanTotal > 0) {
+    effectiveFlexibleDpAmount = Math.min(maxDpAmount, Math.max(minDpAmount, state.customDownpaymentAmount));
+    const rawPct = (effectiveFlexibleDpAmount / flexiblePlanTotal) * 100;
+    effectiveFlexibleDpPct =
+      Math.abs(rawPct - Math.round(rawPct)) < 0.05 ? Math.round(rawPct) : Number(rawPct.toFixed(1));
+  }
+
+  state.downpaymentPercent = effectiveFlexibleDpPct;
+
   // Calcular cada forma de pago seleccionada en orden
   const paymentBreakdowns = state.selectedPayments.map((code) => {
     const pm = PAYMENT_METHODS.find((m) => m.code === code);
@@ -1701,14 +1741,19 @@ function calculateQuotationData() {
 
     let downpaymentAmount = 0;
     let monthlyPayment = 0;
-    const effectiveDpPct = pm.flexibleDownpayment
-      ? state.downpaymentPercent / 100
-      : pm.fixedDownpayment;
+    let effectiveDpPctDisplay = Math.round(pm.fixedDownpayment * 100);
 
     if (pm.type === 'monthly') {
       monthlyPayment = finalTotal / pm.months;
     } else if (pm.type === 'downpayment') {
-      downpaymentAmount = finalTotal * effectiveDpPct;
+      if (pm.flexibleDownpayment) {
+        downpaymentAmount = effectiveFlexibleDpAmount;
+        effectiveDpPctDisplay = effectiveFlexibleDpPct;
+      } else {
+        // Caso D020 (fijo al 20%, no genera enganche flexible)
+        downpaymentAmount = finalTotal * pm.fixedDownpayment;
+        effectiveDpPctDisplay = Math.round(pm.fixedDownpayment * 100);
+      }
       const remainingToFinance = finalTotal - downpaymentAmount;
       monthlyPayment = remainingToFinance / pm.months;
     } else if (pm.type === 'cash') {
@@ -1722,7 +1767,7 @@ function calculateQuotationData() {
       finalTotal,
       downpaymentAmount,
       monthlyPayment,
-      effectiveDpPct: Math.round(effectiveDpPct * 100)
+      effectiveDpPct: effectiveDpPctDisplay
     };
   });
 
@@ -1741,11 +1786,18 @@ function calculateQuotationData() {
     commercialDiscountLabel,
     isPromo3x2,
     isEligibleCategoryFor3x2,
+    minDpAmount,
+    maxDpAmount,
+    effectiveFlexibleDpAmount,
+    effectiveFlexibleDpPct,
     paymentBreakdowns
   };
 }
 
-function renderAll() {
+function renderAll(options = {}) {
+  // Calcular datos de la cotización primero para tener el monto y porcentaje exacto de enganche
+  const data = calculateQuotationData();
+
   // Actualizar estado visual de botones de cantidad de servicios
   const isCat3x2 =
     state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER';
@@ -1762,13 +1814,30 @@ function renderAll() {
   serviceCategorySelect.disabled = state.serviceQty === 0;
   agencySelect.disabled = state.serviceQty === 0;
 
-  // Mostrar/ocultar control deslizable de enganche según si hay un plan con enganche flexible activo
+  // Mostrar/ocultar control de enganche según si hay un plan con enganche flexible activo (excluye D020)
   const hasFlexibleDpSelected = state.selectedPayments.some((code) => {
     const pm = PAYMENT_METHODS.find((m) => m.code === code);
     return pm && pm.flexibleDownpayment;
   });
   const dpBox = document.getElementById('downpaymentControlBox');
   dpBox.style.display = hasFlexibleDpSelected ? 'flex' : 'none';
+
+  // Sincronizar recuadro de cantidad específica de enganche, porcentaje e indicador de límites (15% - 70%)
+  const dpAmountInput = document.getElementById('downpaymentAmountInput');
+  const dpPercentBadge = document.getElementById('downpaymentPercentBadge');
+  const dpRangeHint = document.getElementById('downpaymentRangeHint');
+
+  if (dpAmountInput && !options.skipDpInputSync) {
+    dpAmountInput.value = data.effectiveFlexibleDpAmount.toFixed(2);
+    dpAmountInput.min = data.minDpAmount.toFixed(2);
+    dpAmountInput.max = data.maxDpAmount.toFixed(2);
+  }
+  if (dpPercentBadge) {
+    dpPercentBadge.textContent = `${data.effectiveFlexibleDpPct}%`;
+  }
+  if (dpRangeHint) {
+    dpRangeHint.textContent = `Mín (15%): $${formatMoney(data.minDpAmount)} · Máx (70%): $${formatMoney(data.maxDpAmount)}`;
+  }
 
   // Actualizar etiquetas en la lista de checkboxes si cambió el % de enganche
   document.querySelectorAll('.payment-option-item').forEach((item) => {
@@ -1793,9 +1862,6 @@ function renderAll() {
       .map((code) => `<option value="${code}">Destacar ${code} como Recomendado</option>`)
       .join('');
   recommendedSelect.value = state.recommendedPaymentCode;
-
-  // Calcular datos de la cotización
-  const data = calculateQuotationData();
 
   // Mostrar aviso contextual de Promoción 3x2 en el Paso 2 del configurador
   const promoNoticeEl = document.getElementById('promo3x2Notice');

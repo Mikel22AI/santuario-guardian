@@ -288,22 +288,96 @@ body {
   background: #ffffff;
   border: 1px dashed var(--brand-teal);
   border-radius: 0.5rem;
-  padding: 0.65rem 0.75rem;
+  padding: 0.7rem 0.8rem;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.45rem;
 }
 
-.downpayment-slider-row {
+.downpayment-header-row {
   display: flex;
   align-items: center;
-  gap: 0.65rem;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
-.downpayment-slider-row input[type="range"] {
-  flex: 1;
-  accent-color: var(--brand-teal);
+.btn-reset-dp {
+  background: rgba(28, 85, 96, 0.08);
+  color: var(--brand-teal);
+  border: 1px solid rgba(28, 85, 96, 0.2);
+  border-radius: 0.3rem;
+  padding: 0.15rem 0.45rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  font-family: inherit;
   cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-reset-dp:hover {
+  background: var(--brand-teal);
+  color: #ffffff;
+}
+
+.downpayment-amount-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.downpayment-currency-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid var(--border-card);
+  border-radius: 0.4rem;
+  padding: 0.35rem 0.6rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.downpayment-currency-input-wrap:focus-within {
+  border-color: var(--brand-teal);
+  box-shadow: 0 0 0 2px rgba(28, 85, 96, 0.15);
+}
+
+.dp-currency-prefix {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--brand-teal);
+  margin-right: 0.3rem;
+  user-select: none;
+}
+
+.downpayment-amount-input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 0.9rem;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--text-dark);
+  background: transparent;
+}
+
+.downpayment-pct-badge {
+  min-width: 3.8rem;
+  padding: 0.4rem 0.6rem;
+  background: var(--brand-teal);
+  color: #ffffff;
+  border-radius: 0.4rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.downpayment-range-hint {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
 }
 
 .downpayment-number-input {
