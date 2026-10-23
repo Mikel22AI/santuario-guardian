@@ -1685,27 +1685,52 @@ function calculateQuotationData() {
     (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
   const isPromo3x2 = !hasProperty && isEligibleCategoryFor3x2;
 
-  // Determinar porcentaje de Descuento de Oferta Comercial
-  let commercialDiscountRate = 0;
+  // Condición Excepción 2 Servicios Individuales (Universal Pro o Premier Pro):
+  // 25% de rebaja especial únicamente en Contado (P001, P003) y Enganche mín. 15% a 12 meses (D012, DD12);
+  // 20% en los demás plazos (24, 35 y 36 meses).
+  const isSpecial2ServicesRule =
+    !hasProperty &&
+    state.serviceQty === 2 &&
+    (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
+  const SPECIAL_25_PAYMENT_CODES = ['P001', 'P003', 'D012', 'DD12'];
+
+  function getCommercialDiscountRateForPayment(paymentCode) {
+    if (hasProperty && hasService) {
+      // Contrato Integral
+      const tableForProp = INTEGRAL_DISCOUNTS[property.integralType] || {};
+      return tableForProp[state.serviceQty] || 0;
+    } else if (!hasProperty && hasService) {
+      // Servicios Individuales
+      if (isSpecial2ServicesRule) {
+        return SPECIAL_25_PAYMENT_CODES.includes(paymentCode) ? 0.25 : 0.20;
+      }
+      const tableForServ = INDIVIDUAL_SERVICE_DISCOUNTS[state.serviceCategoryId] || {};
+      return tableForServ[state.serviceQty] || 0;
+    }
+    return 0;
+  }
+
+  // Determinar etiqueta de Descuento de Oferta Comercial para barra de resumen
+  let commercialDiscountRate = getCommercialDiscountRateForPayment('P001');
   let commercialDiscountLabel = 'Sin Descuento Comercial (0%)';
 
   if (hasProperty && hasService) {
     // Contrato Integral
-    const tableForProp = INTEGRAL_DISCOUNTS[property.integralType] || {};
-    commercialDiscountRate = tableForProp[state.serviceQty] || 0;
     commercialDiscountLabel = `Contrato Integral (${property.integralType} + ${state.serviceQty} SF): -${(
       commercialDiscountRate * 100
     ).toFixed(0)}%`;
   } else if (!hasProperty && hasService) {
     // Servicios Individuales
-    const tableForServ = INDIVIDUAL_SERVICE_DISCOUNTS[state.serviceCategoryId] || {};
-    commercialDiscountRate = tableForServ[state.serviceQty] || 0;
-    const pctStr =
-      commercialDiscountRate === 0.3333 ? '33.33%' : `${(commercialDiscountRate * 100).toFixed(0)}%`;
-    if (isPromo3x2) {
-      commercialDiscountLabel = `Promoción 3x2 (3 SF ${state.serviceCategoryId}): -${pctStr} (Compra 2 y lleva 3)`;
+    if (isSpecial2ServicesRule) {
+      commercialDiscountLabel = `Servicios Individuales (2 SF ${state.serviceCategoryId}): -25% (Contado y 12M) / -20% (24, 35 y 36M)`;
     } else {
-      commercialDiscountLabel = `Servicios Individuales (${state.serviceQty} SF ${state.serviceCategoryId}): -${pctStr}`;
+      const pctStr =
+        commercialDiscountRate === 0.3333 ? '33.33%' : `${(commercialDiscountRate * 100).toFixed(0)}%`;
+      if (isPromo3x2) {
+        commercialDiscountLabel = `Promoción 3x2 (3 SF ${state.serviceCategoryId}): -${pctStr} (Compra 2 y lleva 3)`;
+      } else {
+        commercialDiscountLabel = `Servicios Individuales (${state.serviceQty} SF ${state.serviceCategoryId}): -${pctStr}`;
+      }
     }
   } else if (hasProperty && !hasService) {
     commercialDiscountRate = 0;
@@ -1715,8 +1740,15 @@ function calculateQuotationData() {
   const extraSecretRate = (state.extraSecretDiscountPct || 0) / 100;
 
   // Calcular límites de enganche flexible (15% mínimo por defecto y 70% máximo)
-  // Todos los planes con enganche flexible (D035, D024, D012, DD35, DD24, DD12) tienen 15% de desc. por forma de pago
-  const flexiblePlanTotal = combinedListPrice * (1 - 0.15) * (1 - commercialDiscountRate) * (1 - extraSecretRate);
+  // Tomando como referencia el primer plan de enganche flexible seleccionado (o D035 por defecto)
+  const firstFlexCode =
+    state.selectedPayments.find((code) => {
+      const m = PAYMENT_METHODS.find((pm) => pm.code === code);
+      return m && m.flexibleDownpayment;
+    }) || 'D035';
+  const refFlexCommRate = getCommercialDiscountRateForPayment(firstFlexCode);
+  const flexiblePlanTotal =
+    combinedListPrice * (1 - 0.15) * (1 - refFlexCommRate) * (1 - extraSecretRate);
   const minDpAmount = flexiblePlanTotal * 0.15;
   const maxDpAmount = flexiblePlanTotal * 0.70;
 
@@ -1735,8 +1767,9 @@ function calculateQuotationData() {
   // Calcular cada forma de pago seleccionada en orden
   const paymentBreakdowns = state.selectedPayments.map((code) => {
     const pm = PAYMENT_METHODS.find((m) => m.code === code);
+    const cardCommercialDiscountRate = getCommercialDiscountRateForPayment(code);
     const afterPaymentDiscount = combinedListPrice * (1 - pm.discount);
-    const afterCommercialDiscount = afterPaymentDiscount * (1 - commercialDiscountRate);
+    const afterCommercialDiscount = afterPaymentDiscount * (1 - cardCommercialDiscountRate);
     const finalTotal = afterCommercialDiscount * (1 - extraSecretRate);
 
     let downpaymentAmount = 0;
@@ -1747,8 +1780,21 @@ function calculateQuotationData() {
       monthlyPayment = finalTotal / pm.months;
     } else if (pm.type === 'downpayment') {
       if (pm.flexibleDownpayment) {
-        downpaymentAmount = effectiveFlexibleDpAmount;
-        effectiveDpPctDisplay = effectiveFlexibleDpPct;
+        if (state.customDownpaymentAmount === null || finalTotal <= 0) {
+          // 15% por defecto sobre el total de esta tarjeta
+          downpaymentAmount = finalTotal * 0.15;
+          effectiveDpPctDisplay = 15;
+        } else {
+          // Cantidad específica ingresada por el usuario, limitada entre el 15% y 70% de esta tarjeta
+          const cardMinDp = finalTotal * 0.15;
+          const cardMaxDp = finalTotal * 0.70;
+          downpaymentAmount = Math.min(cardMaxDp, Math.max(cardMinDp, state.customDownpaymentAmount));
+          const cardRawPct = (downpaymentAmount / finalTotal) * 100;
+          effectiveDpPctDisplay =
+            Math.abs(cardRawPct - Math.round(cardRawPct)) < 0.05
+              ? Math.round(cardRawPct)
+              : Number(cardRawPct.toFixed(1));
+        }
       } else {
         // Caso D020 (fijo al 20%, no genera enganche flexible)
         downpaymentAmount = finalTotal * pm.fixedDownpayment;
@@ -1767,7 +1813,8 @@ function calculateQuotationData() {
       finalTotal,
       downpaymentAmount,
       monthlyPayment,
-      effectiveDpPct: effectiveDpPctDisplay
+      effectiveDpPct: effectiveDpPctDisplay,
+      cardCommercialDiscountRate
     };
   });
 
@@ -1786,6 +1833,7 @@ function calculateQuotationData() {
     commercialDiscountLabel,
     isPromo3x2,
     isEligibleCategoryFor3x2,
+    isSpecial2ServicesRule,
     minDpAmount,
     maxDpAmount,
     effectiveFlexibleDpAmount,
@@ -1863,13 +1911,18 @@ function renderAll(options = {}) {
       .join('');
   recommendedSelect.value = state.recommendedPaymentCode;
 
-  // Mostrar aviso contextual de Promoción 3x2 en el Paso 2 del configurador
+  // Mostrar aviso contextual de Promoción 3x2 o Excepción de 2 Servicios (25% vs 20%) en el Paso 2 del configurador
   const promoNoticeEl = document.getElementById('promo3x2Notice');
   if (promoNoticeEl) {
     if (data.isPromo3x2 && data.serviceCategory) {
       promoNoticeEl.style.display = 'block';
       promoNoticeEl.innerHTML = `
         <strong>✓ Promoción 3x2 Aplicada (-33.33%):</strong> En la cotización el cliente verá que adquiere <strong>2 ${data.serviceCategory.pluralTitle}</strong> y recibe <strong>1 servicio más sin costo</strong> (3 servicios en total).
+      `;
+    } else if (data.isSpecial2ServicesRule && data.serviceCategory) {
+      promoNoticeEl.style.display = 'block';
+      promoNoticeEl.innerHTML = `
+        <strong>✓ Rebaja Especial 25% (${data.serviceCategory.pluralTitle}):</strong> Aplica <strong>-25%</strong> en <strong>Contado (P001, P003)</strong> y <strong>Enganche mín. 15% a 12 meses (D012, DD12)</strong>. En plazos de 24, 35 y 36 meses aplica <strong>-20%</strong>.
       `;
     } else if (data.isEligibleCategoryFor3x2 && data.hasProperty && data.serviceCategory) {
       promoNoticeEl.style.display = 'block';
