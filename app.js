@@ -1067,7 +1067,9 @@ const SERVICE_CATEGORIES = {
       'Embalsamado',
       'Arreglo estético',
       'Cafetería básica Gayosso',
-      'Paq. ambivalente (Inhumación o Cremación)'
+      'Paq. ambivalente (Inhumación o Cremación)',
+      'Asesoría en trámites',
+      'Traslados Locales'
     ]
   },
   UNIVERSAL: {
@@ -1081,7 +1083,9 @@ const SERVICE_CATEGORIES = {
       'Embalsamado básico',
       'Arreglo estético',
       'Cafetería Gayosso',
-      'Paq. ambivalente (Inhumación o Cremación)'
+      'Paq. ambivalente (Inhumación o Cremación)',
+      'Asesoría en trámites',
+      'Traslados Locales'
     ]
   },
   PREMIER: {
@@ -1101,6 +1105,8 @@ const SERVICE_CATEGORIES = {
         base.push('Paq. multiplaza');
       }
       base.push('Copia acta de defunción');
+      base.push('Asesoría en trámites');
+      base.push('Traslados Locales');
       return base;
     }
   }
@@ -1685,14 +1691,19 @@ function calculateQuotationData() {
     (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
   const isPromo3x2 = !hasProperty && isEligibleCategoryFor3x2;
 
-  // Condición Excepción 2 Servicios Individuales (Universal Pro o Premier Pro):
-  // 25% de rebaja especial únicamente en Contado (P001, P003) y Enganche mín. 15% a 12 meses (D012, DD12);
-  // 20% en los demás plazos (24, 35 y 36 meses).
+  // Condición Excepción 1 y 2 Servicios Individuales (Universal Pro o Premier Pro):
+  // Rebaja especial aplica únicamente en Contado (P001, P003) y Enganche mín. 15% a 12 meses (D012, DD12):
+  // - 1 SF (Universal o Premier): 20% en Contado/12M, 10% en los demás plazos (24, 35 y 36M).
+  // - 2 SF (Universal o Premier): 25% en Contado/12M, 20% en los demás plazos (24, 35 y 36M).
+  const isSpecial1ServiceRule =
+    !hasProperty &&
+    state.serviceQty === 1 &&
+    (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
   const isSpecial2ServicesRule =
     !hasProperty &&
     state.serviceQty === 2 &&
     (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
-  const SPECIAL_25_PAYMENT_CODES = ['P001', 'P003', 'D012', 'DD12'];
+  const SPECIAL_REBATE_PAYMENT_CODES = ['P001', 'P003', 'D012', 'DD12'];
 
   function getCommercialDiscountRateForPayment(paymentCode) {
     if (hasProperty && hasService) {
@@ -1701,8 +1712,11 @@ function calculateQuotationData() {
       return tableForProp[state.serviceQty] || 0;
     } else if (!hasProperty && hasService) {
       // Servicios Individuales
+      if (isSpecial1ServiceRule) {
+        return SPECIAL_REBATE_PAYMENT_CODES.includes(paymentCode) ? 0.20 : 0.10;
+      }
       if (isSpecial2ServicesRule) {
-        return SPECIAL_25_PAYMENT_CODES.includes(paymentCode) ? 0.25 : 0.20;
+        return SPECIAL_REBATE_PAYMENT_CODES.includes(paymentCode) ? 0.25 : 0.20;
       }
       const tableForServ = INDIVIDUAL_SERVICE_DISCOUNTS[state.serviceCategoryId] || {};
       return tableForServ[state.serviceQty] || 0;
@@ -1721,7 +1735,9 @@ function calculateQuotationData() {
     ).toFixed(0)}%`;
   } else if (!hasProperty && hasService) {
     // Servicios Individuales
-    if (isSpecial2ServicesRule) {
+    if (isSpecial1ServiceRule) {
+      commercialDiscountLabel = `Servicios Individuales (1 SF ${state.serviceCategoryId}): -20% (Contado y 12M) / -10% (24, 35 y 36M)`;
+    } else if (isSpecial2ServicesRule) {
       commercialDiscountLabel = `Servicios Individuales (2 SF ${state.serviceCategoryId}): -25% (Contado y 12M) / -20% (24, 35 y 36M)`;
     } else {
       const pctStr =
@@ -1911,18 +1927,13 @@ function renderAll(options = {}) {
       .join('');
   recommendedSelect.value = state.recommendedPaymentCode;
 
-  // Mostrar aviso contextual de Promoción 3x2 o Excepción de 2 Servicios (25% vs 20%) en el Paso 2 del configurador
+  // Mostrar aviso contextual de Promoción 3x2 en el Paso 2 del configurador
   const promoNoticeEl = document.getElementById('promo3x2Notice');
   if (promoNoticeEl) {
     if (data.isPromo3x2 && data.serviceCategory) {
       promoNoticeEl.style.display = 'block';
       promoNoticeEl.innerHTML = `
         <strong>✓ Promoción 3x2 Aplicada (-33.33%):</strong> En la cotización el cliente verá que adquiere <strong>2 ${data.serviceCategory.pluralTitle}</strong> y recibe <strong>1 servicio más sin costo</strong> (3 servicios en total).
-      `;
-    } else if (data.isSpecial2ServicesRule && data.serviceCategory) {
-      promoNoticeEl.style.display = 'block';
-      promoNoticeEl.innerHTML = `
-        <strong>✓ Rebaja Especial 25% (${data.serviceCategory.pluralTitle}):</strong> Aplica <strong>-25%</strong> en <strong>Contado (P001, P003)</strong> y <strong>Enganche mín. 15% a 12 meses (D012, DD12)</strong>. En plazos de 24, 35 y 36 meses aplica <strong>-20%</strong>.
       `;
     } else if (data.isEligibleCategoryFor3x2 && data.hasProperty && data.serviceCategory) {
       promoNoticeEl.style.display = 'block';
