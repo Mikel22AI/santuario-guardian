@@ -1663,6 +1663,9 @@ function renderPaymentCheckboxes() {
   });
 }
 
+// Propiedades de Paquetes Mayores (Solo permiten cotizar con Servicios Premier Pro)
+const MAJOR_PACKAGE_PROPERTY_TYPES = ['Capilla', 'Gaveta Mural', 'Jardín Privado'];
+
 /**
  * Calcula los montos y descuentos en cascada según las reglas oficiales del cuaderno:
  * 1. Suma de Precio de Lista (Propiedad + Servicios)
@@ -1674,6 +1677,13 @@ function calculateQuotationData() {
   const hasProperty = state.locationId !== 'NONE' && !!state.propertyId;
   const property = hasProperty ? PROPERTIES_CATALOG.find((p) => p.id === state.propertyId) : null;
   const location = hasProperty ? PROPERTY_LOCATIONS.find((l) => l.id === state.locationId) : null;
+
+  // Bloquear servicios Universales y Esenciales en Paquetes Mayores (Capillas, Gavetas Mural, Jardines Privados)
+  const isMajorPackageProperty =
+    hasProperty && property && MAJOR_PACKAGE_PROPERTY_TYPES.includes(property.integralType);
+  if (isMajorPackageProperty && state.serviceCategoryId !== 'PREMIER') {
+    state.serviceCategoryId = 'PREMIER';
+  }
 
   const hasService = state.serviceQty > 0;
   const agency = FUNERAL_AGENCIES.find((a) => a.id === state.agencyId);
@@ -1847,6 +1857,7 @@ function calculateQuotationData() {
     combinedListPrice,
     commercialDiscountRate,
     commercialDiscountLabel,
+    isMajorPackageProperty,
     isPromo3x2,
     isEligibleCategoryFor3x2,
     isSpecial2ServicesRule,
@@ -1877,6 +1888,22 @@ function renderAll(options = {}) {
   const agencySelect = document.getElementById('agencySelect');
   serviceCategorySelect.disabled = state.serviceQty === 0;
   agencySelect.disabled = state.serviceQty === 0;
+
+  // Bloquear opciones Esencial y Universal cuando se selecciona un Paquete Mayor (Capilla, Gaveta Mural, Jardín Privado)
+  Array.from(serviceCategorySelect.options).forEach((opt) => {
+    if (opt.value === 'ESENCIAL') {
+      opt.disabled = !!data.isMajorPackageProperty;
+      opt.textContent = data.isMajorPackageProperty
+        ? '[826881] Previsión Esencial Pro (No disponible en Paquetes Mayores)'
+        : '[826881] Previsión Esencial Pro';
+    } else if (opt.value === 'UNIVERSAL') {
+      opt.disabled = !!data.isMajorPackageProperty;
+      opt.textContent = data.isMajorPackageProperty
+        ? '[826884] Previsión Universal Pro (No disponible en Paquetes Mayores)'
+        : '[826884] Previsión Universal Pro';
+    }
+  });
+  serviceCategorySelect.value = state.serviceCategoryId;
 
   // Mostrar/ocultar control de enganche según si hay un plan con enganche flexible activo (excluye D020)
   const hasFlexibleDpSelected = state.selectedPayments.some((code) => {
