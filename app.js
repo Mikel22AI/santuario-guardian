@@ -1026,32 +1026,14 @@ const AGENCY_PRICES_BY_TIER = {
 };
 
 const FUNERAL_AGENCIES = [
-  // Principales con clave oficial (Valle de México / Cuernavaca)
-  { id: 'FS05', code: 'FS05', name: 'Agencia Santa Mónica', tier: 'B', group: 'Valle de México y Centro' },
-  { id: 'FS06', code: 'FS06', name: 'Agencia Sullivan', tier: 'B', group: 'Valle de México y Centro' },
-  { id: 'FF04', code: 'FF04', name: 'Agencia Félix Cuevas', tier: 'AA', group: 'Valle de México y Centro' },
-  { id: 'FS09', code: 'FS09', name: 'Agencia Lomas Memorial', tier: 'AA', group: 'Valle de México y Centro', premierRecommended: true },
-  { id: 'MA02', code: 'MA02', name: 'Agencia Mausoleos del Ángel', tier: 'C', group: 'Valle de México y Centro' },
-  { id: 'GJTM', code: 'GJTM', name: 'Agencia Jardines del Tiempo (Colima)', tier: 'C', group: 'Valle de México y Centro' },
-  { id: 'FC03', code: 'FC03', name: 'Agencia Cuernavaca', tier: 'C', group: 'Valle de México y Centro' },
-  // Otras plazas nacionales de la tabla Oferta Comercial
-  { id: 'GDLC', code: 'GDLC', name: 'Agencia Gdl - El Carmen', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'LEOF', code: 'LEOF', name: 'Agencia León - Francisco Villa', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'MTYM', code: 'MTYM', name: 'Agencia Mty - Marianas', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'MTYN', code: 'MTYN', name: 'Agencia Mty - Nogalar', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'MXLL', code: 'MXLL', name: 'Agencia Mxl - López Mateos', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'TIJR', code: 'TIJR', name: 'Agencia Tij - El Río', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'TORP', code: 'TORP', name: 'Agencia Tor - Periférico', tier: 'A', group: 'Plazas Nacionales (Agencias A)' },
-  { id: 'AGSC', code: 'AGSC', name: 'Agencia Aguascalientes', tier: 'B', group: 'Plazas Nacionales (Agencias B)' },
-  { id: 'MORE', code: 'MORE', name: 'Agencia Morelia', tier: 'B', group: 'Plazas Nacionales (Agencias B)' },
-  { id: 'REYN', code: 'REYN', name: 'Agencia Reynosa', tier: 'B', group: 'Plazas Nacionales (Agencias B)' },
-  { id: 'ACAP', code: 'ACAP', name: 'Agencia Acapulco', tier: 'C', group: 'Plazas Nacionales (Agencias C)' },
-  { id: 'IRAP', code: 'IRAP', name: 'Agencia Irapuato', tier: 'C', group: 'Plazas Nacionales (Agencias C)' },
-  { id: 'MXLM', code: 'MXLM', name: 'Agencia Mxl - Madero', tier: 'C', group: 'Plazas Nacionales (Agencias C)' },
-  { id: 'TORA', code: 'TORA', name: 'Agencia Tor - Allende', tier: 'C', group: 'Plazas Nacionales (Agencias C)' },
-  { id: 'GDLV', code: 'GDLV', name: 'Agencia Gdl - Vallarta', tier: 'C', group: 'Plazas Nacionales (Agencias C)' },
-  { id: 'LEOL', code: 'LEOL', name: 'Agencia León - López Mateos', tier: 'C', group: 'Plazas Nacionales (Agencias C)' },
-  { id: 'TIJS', code: 'TIJS', name: 'Agencia Tij - Santa Gema', tier: 'C', group: 'Plazas Nacionales (Agencias C)' }
+  // Agencias Valle de México (VDM)
+  { id: 'FS05', code: 'FS05', name: 'Agencia Santa Mónica', tier: 'B', group: 'Valle de México (VDM)' },
+  { id: 'FS06', code: 'FS06', name: 'Agencia Sullivan', tier: 'B', group: 'Valle de México (VDM)' },
+  { id: 'FF04', code: 'FF04', name: 'Agencia Félix Cuevas', tier: 'AA', group: 'Valle de México (VDM)' },
+  { id: 'FS09', code: 'FS09', name: 'Agencia Lomas Memorial', tier: 'AA', group: 'Valle de México (VDM)', premierRecommended: true },
+  { id: 'MA02', code: 'MA02', name: 'Agencia Mausoleos del Ángel', tier: 'C', group: 'Valle de México (VDM)' },
+  { id: 'GJTM', code: 'GJTM', name: 'Agencia Jardines del Tiempo (Colima)', tier: 'C', group: 'Valle de México (VDM)' },
+  { id: 'FC03', code: 'FC03', name: 'Agencia Cuernavaca', tier: 'C', group: 'Valle de México (VDM)' }
 ];
 
 // 4. Categorías de Servicios Funerarios
@@ -1664,7 +1646,9 @@ function renderPaymentCheckboxes() {
   });
 }
 
-// Propiedades de Paquetes Mayores (Solo permiten cotizar con Servicios Premier Pro)
+// Propiedades de Paquetes Mayores:
+// - Capilla y Jardín Privado: permiten Universal Pro y Premier Pro (bloquean Esencial Pro)
+// - Gaveta Mural: permite únicamente Premier Pro (bloquea Esencial Pro y Universal Pro)
 const MAJOR_PACKAGE_PROPERTY_TYPES = ['Capilla', 'Gaveta Mural', 'Jardín Privado'];
 
 /**
@@ -1679,11 +1663,18 @@ function calculateQuotationData() {
   const property = hasProperty ? PROPERTIES_CATALOG.find((p) => p.id === state.propertyId) : null;
   const location = hasProperty ? PROPERTY_LOCATIONS.find((l) => l.id === state.locationId) : null;
 
-  // Bloquear servicios Universales y Esenciales en Paquetes Mayores (Capillas, Gavetas Mural, Jardines Privados)
+  // Reglas de bloqueo de servicios en Paquetes Mayores:
+  // - Gaveta Mural: bloquea Esencial y Universal (solo permite Premier)
+  // - Capilla y Jardín Privado: bloquea únicamente Esencial (permite Universal y Premier)
   const isMajorPackageProperty =
     hasProperty && property && MAJOR_PACKAGE_PROPERTY_TYPES.includes(property.integralType);
-  if (isMajorPackageProperty && state.serviceCategoryId !== 'PREMIER') {
+  const isGavetaMuralProperty =
+    hasProperty && property && property.integralType === 'Gaveta Mural';
+
+  if (isGavetaMuralProperty && state.serviceCategoryId !== 'PREMIER') {
     state.serviceCategoryId = 'PREMIER';
+  } else if (isMajorPackageProperty && state.serviceCategoryId === 'ESENCIAL') {
+    state.serviceCategoryId = 'UNIVERSAL';
   }
 
   const hasService = state.serviceQty > 0;
@@ -1870,6 +1861,7 @@ function calculateQuotationData() {
     commercialDiscountRate,
     commercialDiscountLabel,
     isMajorPackageProperty,
+    isGavetaMuralProperty,
     isPromo3x2,
     isEligibleCategoryFor3x2,
     isSpecial2ServicesRule,
@@ -1901,7 +1893,9 @@ function renderAll(options = {}) {
   serviceCategorySelect.disabled = state.serviceQty === 0;
   agencySelect.disabled = state.serviceQty === 0;
 
-  // Bloquear opciones Esencial y Universal cuando se selecciona un Paquete Mayor (Capilla, Gaveta Mural, Jardín Privado)
+  // Reglas de bloqueo en selector de Categoría de Servicio:
+  // - Esencial bloqueado en Capilla, Jardín Privado y Gaveta Mural
+  // - Universal bloqueado únicamente en Gaveta Mural (permitido en Capilla y Jardín Privado)
   Array.from(serviceCategorySelect.options).forEach((opt) => {
     if (opt.value === 'ESENCIAL') {
       opt.disabled = !!data.isMajorPackageProperty;
@@ -1909,9 +1903,9 @@ function renderAll(options = {}) {
         ? '[826881] Previsión Esencial Pro (No disponible en Paquetes Mayores)'
         : '[826881] Previsión Esencial Pro';
     } else if (opt.value === 'UNIVERSAL') {
-      opt.disabled = !!data.isMajorPackageProperty;
-      opt.textContent = data.isMajorPackageProperty
-        ? '[826884] Previsión Universal Pro (No disponible en Paquetes Mayores)'
+      opt.disabled = !!data.isGavetaMuralProperty;
+      opt.textContent = data.isGavetaMuralProperty
+        ? '[826884] Previsión Universal Pro (No disponible en Gaveta Mural)'
         : '[826884] Previsión Universal Pro';
     }
   });
