@@ -1119,6 +1119,7 @@ const INTEGRAL_DISCOUNTS = {
   'Jardín Privado': { 1: 0.07, 2: 0.09, 3: 0.11, 4: 0.12 },
   'Lote T.A y Preferencial': { 1: 0.10, 2: 0.20, 3: 0.20, 4: 0.25 },
   'Nicho': { 1: 0.15, 2: 0.25, 3: 0.25, 4: 0.30 },
+  'Nicho_MSM1': { 1: 0.20, 2: 0.30, 3: 0.30, 4: 0.35 },
   'Ciprés Ecológico': { 1: 0.15, 2: 0.25, 3: 0.25, 4: 0.30 },
   'Gaveta Mural': { 1: 0.20, 2: 0.30, 3: 0.30, 4: 0.35 },
   'Sendero Memorial': { 1: 0.20, 2: 0.30, 3: 0.30, 4: 0.35 }
@@ -1715,10 +1716,18 @@ function calculateQuotationData() {
     (state.serviceCategoryId === 'UNIVERSAL' || state.serviceCategoryId === 'PREMIER');
   const SPECIAL_REBATE_PAYMENT_CODES = ['P001', 'P003', 'D012', 'DD12'];
 
+  const isSantaMonicaIntegralExclusive =
+    hasProperty &&
+    hasService &&
+    property.locationId === 'MSM1' &&
+    property.integralType === 'Nicho' &&
+    state.agencyId === 'FS05';
+
   function getCommercialDiscountRateForPayment(paymentCode) {
     if (hasProperty && hasService) {
-      // Contrato Integral
-      const tableForProp = INTEGRAL_DISCOUNTS[property.integralType] || {};
+      // Contrato Integral (Exclusiva Mausoleo Santa Mónica MSM1 + Agencia Santa Mónica FS05: 20%, 30%, 30%, 35%)
+      const integralKey = isSantaMonicaIntegralExclusive ? 'Nicho_MSM1' : property.integralType;
+      const tableForProp = INTEGRAL_DISCOUNTS[integralKey] || {};
       return tableForProp[state.serviceQty] || 0;
     } else if (!hasProperty && hasService) {
       // Servicios Individuales
@@ -1740,7 +1749,10 @@ function calculateQuotationData() {
 
   if (hasProperty && hasService) {
     // Contrato Integral
-    commercialDiscountLabel = `Contrato Integral (${property.integralType} + ${state.serviceQty} SF): -${(
+    const propLabel = isSantaMonicaIntegralExclusive
+      ? 'Nicho + Agencia Santa Mónica'
+      : property.integralType;
+    commercialDiscountLabel = `Contrato Integral (${propLabel} + ${state.serviceQty} SF): -${(
       commercialDiscountRate * 100
     ).toFixed(0)}%`;
   } else if (!hasProperty && hasService) {
