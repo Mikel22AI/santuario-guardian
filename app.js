@@ -110,7 +110,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Gabriel Nivel Superior',
     integralType: 'Nicho',
     price: 33035,
-    features: ['Capacidad: 2 Urnas', 'Mausoleo Gabriel · Nivel Superior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Superior']
   },
   {
     id: 'MA01-827434',
@@ -120,7 +120,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Miguel Nivel Superior',
     integralType: 'Nicho',
     price: 33035,
-    features: ['Capacidad: 2 Urnas', 'Mausoleo Miguel · Nivel Superior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Superior']
   },
   {
     id: 'MA01-827416',
@@ -130,7 +130,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Gabriel Nivel Inferior',
     integralType: 'Nicho',
     price: 38850,
-    features: ['Capacidad: 2 Urnas', 'Mausoleo Gabriel · Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Inferior']
   },
   {
     id: 'MA01-827437',
@@ -140,7 +140,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Miguel Nivel Inferior',
     integralType: 'Nicho',
     price: 38850,
-    features: ['Capacidad: 2 Urnas', 'Mausoleo Miguel · Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Inferior']
   },
   {
     id: 'MA01-827415',
@@ -150,7 +150,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Gabriel Nivel Medio',
     integralType: 'Nicho',
     price: 44580,
-    features: ['Capacidad: 2 Urnas', 'Mausoleo Gabriel · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Medio']
   },
   {
     id: 'MA01-827435',
@@ -160,7 +160,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Mausoleo Miguel Nivel Medio',
     integralType: 'Nicho',
     price: 44580,
-    features: ['Capacidad: 2 Urnas', 'Mausoleo Miguel · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Medio']
   },
   {
     id: 'MA01-827417',
@@ -170,7 +170,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Mausoleo Gabriel Nivel Superior',
     integralType: 'Nicho',
     price: 66065,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Mausoleo Gabriel · Nivel Superior']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Superior']
   },
   {
     id: 'MA01-827438',
@@ -180,7 +180,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Mausoleo Miguel Nivel Superior',
     integralType: 'Nicho',
     price: 66065,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Mausoleo Miguel · Nivel Superior']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Superior']
   },
   {
     id: 'MA01-827419',
@@ -190,7 +190,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Mausoleo Gabriel Nivel Inferior',
     integralType: 'Nicho',
     price: 77650,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Mausoleo Gabriel · Nivel Inferior']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Inferior']
   },
   {
     id: 'MA01-827440',
@@ -200,7 +200,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Mausoleo Miguel Nivel Inferior',
     integralType: 'Nicho',
     price: 77650,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Mausoleo Miguel · Nivel Inferior']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Inferior']
   },
   {
     id: 'MA01-827430',
@@ -210,7 +210,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Gabriel Nivel Superior',
     integralType: 'Nicho',
     price: 85850,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Mausoleo Gabriel · Nivel Superior']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Superior']
   },
   {
     id: 'MA01-827441',
@@ -220,7 +220,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Miguel Nivel Superior',
     integralType: 'Nicho',
     price: 85850,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Mausoleo Miguel · Nivel Superior']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Superior']
   },
   {
     id: 'MA01-827418',
@@ -230,7 +230,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Mausoleo Gabriel Nivel Medio',
     integralType: 'Nicho',
     price: 89160,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Mausoleo Gabriel · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Medio']
   },
   {
     id: 'MA01-827439',
@@ -240,7 +240,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Mausoleo Miguel Nivel Medio',
     integralType: 'Nicho',
     price: 89160,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Mausoleo Miguel · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Medio']
   },
   {
     id: 'MA01-827432',
@@ -250,7 +250,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Gabriel Nivel Inferior',
     integralType: 'Nicho',
     price: 100850,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Mausoleo Gabriel · Nivel Inferior']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Inferior']
   },
   {
     id: 'MA01-827443',
@@ -260,7 +260,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Miguel Nivel Inferior',
     integralType: 'Nicho',
     price: 100850,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Mausoleo Miguel · Nivel Inferior']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Inferior']
   },
   {
     id: 'MA01-827431',
@@ -270,7 +270,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Gabriel Nivel Medio',
     integralType: 'Nicho',
     price: 115850,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Mausoleo Gabriel · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Medio']
   },
   {
     id: 'MA01-827442',
@@ -280,7 +280,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Miguel Nivel Medio',
     integralType: 'Nicho',
     price: 115850,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Mausoleo Miguel · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Medio']
   },
   {
     id: 'MA01-827433',
@@ -290,7 +290,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Cabecera Mausoleo Gabriel Nivel Medio',
     integralType: 'Nicho',
     price: 231800,
-    features: ['Capacidad Familiar (Cabecera)', 'Mausoleo Gabriel · Nivel Medio']
+    features: ['Capacidad: 8 Urnas (Familiar Cabecera)', '8 Ceremonias de depósito de urna', 'Mausoleo Gabriel · Nivel Medio']
   },
   {
     id: 'MA01-827444',
@@ -300,7 +300,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Cabecera Mausoleo Miguel Nivel Medio',
     integralType: 'Nicho',
     price: 231800,
-    features: ['Capacidad Familiar (Cabecera)', 'Mausoleo Miguel · Nivel Medio']
+    features: ['Capacidad: 8 Urnas (Familiar Cabecera)', '8 Ceremonias de depósito de urna', 'Mausoleo Miguel · Nivel Medio']
   },
   // Senderos MA01
   {
@@ -493,7 +493,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Superior',
     integralType: 'Nicho',
     price: 53725,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'CP20-826921',
@@ -503,7 +503,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Inferior',
     integralType: 'Nicho',
     price: 66125,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   },
   {
     id: 'CP20-826920',
@@ -513,7 +513,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Medio',
     integralType: 'Nicho',
     price: 78525,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'CP20-826922',
@@ -523,7 +523,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Nivel Superior',
     integralType: 'Nicho',
     price: 134315,
-    features: ['Capacidad Familiar', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 8 Urnas (Nicho Familiar)', '8 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'CP20-826924',
@@ -533,7 +533,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Nivel Inferior',
     integralType: 'Nicho',
     price: 165310,
-    features: ['Capacidad Familiar', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 8 Urnas (Nicho Familiar)', '8 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   },
   {
     id: 'CP20-826923',
@@ -543,7 +543,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Nivel Medio',
     integralType: 'Nicho',
     price: 196310,
-    features: ['Capacidad Familiar', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 8 Urnas (Nicho Familiar)', '8 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'CP20-826699',
@@ -645,7 +645,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Cementerio Nivel Superior',
     integralType: 'Nicho',
     price: 52415,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'CC21-826253',
@@ -655,7 +655,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Cementerio Nivel Inferior',
     integralType: 'Nicho',
     price: 62900,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   },
   {
     id: 'CC21-826252',
@@ -665,7 +665,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Cementerio Nivel Medio',
     integralType: 'Nicho',
     price: 75130,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'CC21-826705',
@@ -707,7 +707,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Premier Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 59495,
-    features: ['Capacidad: 2 Urnas', 'Zona Premier · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Premier · Nivel Sup/Inf']
   },
   {
     id: 'MFC1-822364',
@@ -717,7 +717,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 84995,
-    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Capilla · Nivel Sup/Inf']
   },
   {
     id: 'MFC1-822368',
@@ -727,7 +727,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Medio',
     integralType: 'Nicho',
     price: 114750,
-    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Capilla · Nivel Medio']
   },
   {
     id: 'MFC1-825739',
@@ -737,7 +737,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Zona Premier Nivel Sup/Inf',
     integralType: 'Nicho',
     price: 154690,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Zona Premier · Nivel Sup/Inf']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Zona Premier · Nivel Sup/Inf']
   },
   {
     id: 'MFC1-821854',
@@ -747,7 +747,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Zona Capilla Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 170000,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Zona Capilla · Nivel Sup/Inf']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Zona Capilla · Nivel Sup/Inf']
   },
   {
     id: 'MFC1-821853',
@@ -757,7 +757,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Zona Capilla Nivel Medio',
     integralType: 'Nicho',
     price: 229495,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Zona Capilla · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Zona Capilla · Nivel Medio']
   },
 
   // ===================== MLM1: MAUSOLEO LOMAS MEMORIAL =====================
@@ -769,7 +769,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona JPII Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 120185,
-    features: ['Capacidad: 2 Urnas', 'Zona Juan Pablo II · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Juan Pablo II · Nivel Sup/Inf']
   },
   {
     id: 'MLM1-827239',
@@ -779,7 +779,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona JPII Nivel Medio',
     integralType: 'Nicho',
     price: 137915,
-    features: ['Capacidad: 2 Urnas', 'Zona Juan Pablo II · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Juan Pablo II · Nivel Medio']
   },
   {
     id: 'MLM1-827235',
@@ -789,7 +789,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Premier Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 145005,
-    features: ['Capacidad: 2 Urnas', 'Zona Premier · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Premier · Nivel Sup/Inf']
   },
   {
     id: 'MLM1-827236',
@@ -799,7 +799,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Premier Nivel Medio',
     integralType: 'Nicho',
     price: 166275,
-    features: ['Capacidad: 2 Urnas', 'Zona Premier · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Premier · Nivel Medio']
   },
 
   // ===================== MGM2: MAUSOLEO SULLIVAN =====================
@@ -811,7 +811,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Mausoleo Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 25430,
-    features: ['Capacidad: 2 Urnas', 'Zona Mausoleo · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Mausoleo · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-823080',
@@ -821,7 +821,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Mausoleo Nivel Medio',
     integralType: 'Nicho',
     price: 34335,
-    features: ['Capacidad: 2 Urnas', 'Zona Mausoleo · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Mausoleo · Nivel Medio']
   },
   {
     id: 'MGM2-824600',
@@ -831,7 +831,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Individual Zona Capilla Nivel Sup/Inf',
     integralType: 'Nicho',
     price: 50860,
-    features: ['Capacidad: 1 Urna', 'Zona Capilla · Nivel Sup/Inf']
+    features: ['Capacidad: 1 Urna', '1 Ceremonia de depósito de urna', 'Zona Capilla · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-823075',
@@ -841,7 +841,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Zona Mausoleo Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 50860,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Zona Mausoleo · Nivel Sup/Inf']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Zona Mausoleo · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-823563',
@@ -851,7 +851,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Nivel Sup/Inf',
     integralType: 'Nicho',
     price: 66120,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Zona Mausoleo · Nivel Sup/Inf']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Zona Mausoleo · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-823081',
@@ -861,7 +861,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Zona Mausoleo Nivel Medio',
     integralType: 'Nicho',
     price: 68655,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Zona Mausoleo · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Zona Mausoleo · Nivel Medio']
   },
   {
     id: 'MGM2-823551',
@@ -871,7 +871,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Mausoleo Nivel Medio',
     integralType: 'Nicho',
     price: 89265,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Zona Mausoleo · Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Zona Mausoleo · Nivel Medio']
   },
   {
     id: 'MGM2-824602',
@@ -881,7 +881,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Superior/Inferior',
     integralType: 'Nicho',
     price: 101720,
-    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Sup/Inf']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Capilla · Nivel Sup/Inf']
   },
   {
     id: 'MGM2-824603',
@@ -891,7 +891,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Zona Capilla Nivel Medio',
     integralType: 'Nicho',
     price: 137320,
-    features: ['Capacidad: 2 Urnas', 'Zona Capilla · Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Zona Capilla · Nivel Medio']
   },
 
   // ===================== MSM1: MAUSOLEO SANTA MÓNICA =====================
@@ -903,7 +903,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Superior',
     integralType: 'Nicho',
     price: 42500,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'MSM1-NC-MED',
@@ -913,7 +913,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Medio',
     integralType: 'Nicho',
     price: 57400,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'MSM1-NC-INF',
@@ -923,7 +923,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Chico Nivel Inferior',
     integralType: 'Nicho',
     price: 49900,
-    features: ['Capacidad: 2 Urnas', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 2 Urnas', '2 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   },
   {
     id: 'MSM1-NG-SUP',
@@ -933,7 +933,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Nivel Superior',
     integralType: 'Nicho',
     price: 85000,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'MSM1-NG-MED',
@@ -943,7 +943,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Nivel Medio',
     integralType: 'Nicho',
     price: 114800,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'MSM1-NG-INF',
@@ -953,7 +953,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Nivel Inferior',
     integralType: 'Nicho',
     price: 99900,
-    features: ['Capacidad: 4 Urnas (Nicho Grande)', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 4 Urnas (Nicho Grande)', '4 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   },
   {
     id: 'MSM1-NGC-SUP',
@@ -963,7 +963,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Nivel Superior',
     integralType: 'Nicho',
     price: 110500,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'MSM1-NGC-MED',
@@ -973,7 +973,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Nivel Medio',
     integralType: 'Nicho',
     price: 149200,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'MSM1-NGC-INF',
@@ -983,7 +983,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Grande Cabecera Nivel Inferior',
     integralType: 'Nicho',
     price: 129800,
-    features: ['Capacidad: 4 Urnas (Cabecera)', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 4 Urnas (Cabecera)', '4 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   },
   {
     id: 'MSM1-NFC-SUP',
@@ -993,7 +993,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Cabecera Nivel Superior',
     integralType: 'Nicho',
     price: 221000,
-    features: ['Capacidad Familiar (Cabecera)', 'Ubicación Nivel Superior']
+    features: ['Capacidad: 8 Urnas (Familiar Cabecera)', '8 Ceremonias de depósito de urna', 'Ubicación Nivel Superior']
   },
   {
     id: 'MSM1-NFC-MED',
@@ -1003,7 +1003,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Cabecera Nivel Medio',
     integralType: 'Nicho',
     price: 298400,
-    features: ['Capacidad Familiar (Cabecera)', 'Ubicación Nivel Medio']
+    features: ['Capacidad: 8 Urnas (Familiar Cabecera)', '8 Ceremonias de depósito de urna', 'Ubicación Nivel Medio']
   },
   {
     id: 'MSM1-NFC-INF',
@@ -1013,7 +1013,7 @@ const PROPERTIES_CATALOG = [
     displayName: 'Nicho Familiar Cabecera Nivel Inferior',
     integralType: 'Nicho',
     price: 259700,
-    features: ['Capacidad Familiar (Cabecera)', 'Ubicación Nivel Inferior']
+    features: ['Capacidad: 8 Urnas (Familiar Cabecera)', '8 Ceremonias de depósito de urna', 'Ubicación Nivel Inferior']
   }
 ];
 
@@ -1149,21 +1149,21 @@ const PAYMENT_METHODS = [
   {
     code: 'D024',
     discount: 0.15,
-    months: 24,
+    months: 23,
     type: 'downpayment',
     flexibleDownpayment: true,
     fixedDownpayment: 0.15,
-    shortLabel: (dpPct) => `Enganche ${dpPct}% (24 Meses)`,
+    shortLabel: (dpPct) => `Enganche ${dpPct}% (23 Meses)`,
     periodLabel: 'Mensualidad'
   },
   {
     code: 'D012',
     discount: 0.15,
-    months: 12,
+    months: 11,
     type: 'downpayment',
     flexibleDownpayment: true,
     fixedDownpayment: 0.15,
-    shortLabel: (dpPct) => `Enganche ${dpPct}% (12 Meses)`,
+    shortLabel: (dpPct) => `Enganche ${dpPct}% (11 Meses)`,
     periodLabel: 'Mensualidad'
   },
   {
@@ -1189,21 +1189,21 @@ const PAYMENT_METHODS = [
   {
     code: 'DD24',
     discount: 0.15,
-    months: 24,
+    months: 23,
     type: 'downpayment',
     flexibleDownpayment: true,
     fixedDownpayment: 0.15,
-    shortLabel: (dpPct) => `Enganche ${dpPct}% Débito (24 Meses)`,
+    shortLabel: (dpPct) => `Enganche ${dpPct}% Débito (23 Meses)`,
     periodLabel: 'Mensualidad'
   },
   {
     code: 'DD12',
     discount: 0.15,
-    months: 12,
+    months: 11,
     type: 'downpayment',
     flexibleDownpayment: true,
     fixedDownpayment: 0.15,
-    shortLabel: (dpPct) => `Enganche ${dpPct}% Débito (12 Meses)`,
+    shortLabel: (dpPct) => `Enganche ${dpPct}% Débito (11 Meses)`,
     periodLabel: 'Mensualidad'
   },
   {
